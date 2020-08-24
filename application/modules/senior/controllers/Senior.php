@@ -59,13 +59,35 @@ class Senior extends MY_Controller
            
             $data[] = $row;
         }  
-
-        
  
         $output = array(
             "data" => $data,
         );
         
         echo json_encode($output);
+    }
+
+    function save()
+    {
+        $data3 = array(
+            'fname' => $this->input->post('firstname'),
+            'mname' => $this->input->post('middlename'),
+            'lname' => $this->input->post('lastname'),
+            'birthdate' => $this->input->post('birthdate'),
+            'sex' => $this->input->post('gender'),
+            'purok' => $this->input->post('purok'),
+            'barangay' => $this->input->post('barangay'),
+        );
+        
+        if($this->input->post('id') == '')
+        {
+            $insert = $this->senior_mdl->save($data3);
+        }
+        else
+        {
+            $insert = $this->senior_mdl->update(array("id" => $this->input->post('id')), $data3);
+        }
+
+        echo json_encode(array("status" => TRUE, "id"=> $insert));
     }
 }

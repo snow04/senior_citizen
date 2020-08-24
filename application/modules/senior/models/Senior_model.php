@@ -4,7 +4,6 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Senior_model extends CI_Model
 {
     var $table = 'personal_info';
-    var $view = 'vw_doctor';
 
     public function __construct()
     {
@@ -19,4 +18,17 @@ class Senior_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function save($data)
+    {
+      $this->db->insert($this->table, $data);
+      return $this->db->insert_id();
+    }
+
+    public function update($where,$data)
+    {
+      $this->db->update($this->table, $data, $where);
+      return $this->db->affected_rows();
+    }
+    
 }

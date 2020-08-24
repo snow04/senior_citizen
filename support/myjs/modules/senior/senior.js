@@ -26,7 +26,7 @@ let seniorTable =  $('#seniorTable').DataTable({
     //     }
     // ],
 
-});
+});     
 
 $('.dt-buttons').addClass('float-left');
 
@@ -35,11 +35,23 @@ $('#seniorForm').submit(function(e){
     $.post(`${base_url}/senior/save`, $(this).serialize(), function(succ){
         if(succ.status)
         {
-            console.log(succ.status);
+            Swal.fire(
+                'Success!',
+                'You have successfully registered!',
+                'success'
+              ).then(()=>{
+                  $('#doctorForm')[0].reset();
+                  doctorTable.ajax.reload();
+                  $('#doctorModal').modal('hide');
+              })
         }
         else
         {
-            
+            Swal.fire(
+                'Failed!',
+                `${data.error}`,
+                'error'
+              ); 
         }
     });
 });
