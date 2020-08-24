@@ -12,7 +12,7 @@
       </div>
       <div class="list-group list-group-flush">
         <a href="<?=base_url('profile/')?>" class="list-group-item list-group-item-action bg-light"><i class="fas fa-file"></i> Dashboard</a>
-        <a href="<?=base_url('Senior/')?>" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i> Senior Citizen</a>
+        <a href="<?=base_url('senior/')?>" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i> Senior Citizen</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

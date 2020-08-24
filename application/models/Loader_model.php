@@ -15,7 +15,7 @@ class Loader_model extends CI_Model{
             echo '<link href="'.s_url.'fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />';
         }
 
-        $dt_tables=array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile','patient_history');
+        $dt_tables=array('senior');
 
         if (in_array($uri_string, $dt_tables)) 
         {
@@ -24,7 +24,7 @@ class Loader_model extends CI_Model{
             echo '<link href="'.s_url.'datatables/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />';
         }
 
-        $dt_filter_pane = array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile','patient_history');
+        $dt_filter_pane = array('senior');
 
         if (in_array($uri_string, $dt_filter_pane)) 
         {
@@ -32,7 +32,7 @@ class Loader_model extends CI_Model{
             echo '<link href="'.s_url.'datatables/select/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />';
         }
 
-        $dt_col_reorder = array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile','patient_history');
+        $dt_col_reorder = array('senior');
 
         if (in_array($uri_string, $dt_col_reorder)) 
         {
@@ -71,14 +71,14 @@ class Loader_model extends CI_Model{
             echo '<script src="' . s_url . 'fullcalendar/fullcalendar.min.js" type="text/javascript" defer></script>';
         }
         
-        $dt_tables=array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile','patient_history');
+        $dt_tables=array('senior');
         
         if (in_array($uri_string,$dt_tables)) 
         {
             echo '<script src="' . s_url . 'datatables/datatables.min.js" type="text/javascript" defer></script>';
         }
 
-        $dt_filter_pane = array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile','patient_history');
+        $dt_filter_pane = array('senior');
 
         if (in_array($uri_string,$dt_filter_pane)) 
         {
@@ -86,7 +86,7 @@ class Loader_model extends CI_Model{
             echo '<script src="' . s_url . 'datatables/select/js/select.bootstrap4.min.js" type="text/javascript" defer></script>';
         }
 
-        $dt_buttons = array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile','patient_history');
+        $dt_buttons = array('senior');
 
         if (in_array($uri_string,$dt_buttons)) 
         {
@@ -99,7 +99,7 @@ class Loader_model extends CI_Model{
             echo '<script src="' . s_url . 'datatables/jszip/jszip.min.js" type="text/javascript" defer></script>';
         }
 
-        $dt_col_reorder = array('doctor','clinic_patient','clinic','guest','patient_doctor','doctor_room','appointments','schedule','profile');
+        $dt_col_reorder = array('senior');
 
         if (in_array($uri_string,$dt_col_reorder)) 
         {
@@ -118,6 +118,11 @@ class Loader_model extends CI_Model{
         if(uri_string()=='profile')
         {
             echo '<script src="'.s_url.'myjs/modules/profile/profile.js" type="module" defer></script>';
+        }
+
+        if(uri_string()=='senior')
+        {
+            echo '<script src="'.s_url.'myjs/modules/senior/senior.js" type="module" defer></script>';
         }
         
         // $val = $this->uri->segment(3);

@@ -32,4 +32,40 @@ class Senior extends MY_Controller
         $data['template_type']="admin";
         $this->load->view('includes/templates',$data);
     }
+    public function senior_list()
+    {
+        $list = $this->senior_mdl->senior_list();
+        
+
+        $data = array();
+
+        foreach ($list as $t) 
+        {
+            $row = array();
+
+            $name = array();
+            $name[] = $t->fname;
+            $name[] = $t->lname;
+
+            $row['name'] = $name;
+
+            // $row['username'] = $t->username;
+            $row['gender'] = $t->sex;
+            $row['purok'] = $t->purok;
+            $row['barangay'] = $t->barangay;
+            $row['picture'] = 'p';
+            $row['signature'] = 's';
+            $row['thumbmark'] = 't';
+           
+            $data[] = $row;
+        }  
+
+        
+ 
+        $output = array(
+            "data" => $data,
+        );
+        
+        echo json_encode($output);
+    }
 }
