@@ -40,9 +40,8 @@ $('#seniorForm').submit(function(e){
                 'You have successfully registered!',
                 'success'
               ).then(()=>{
-                  $('#doctorForm')[0].reset();
-                  doctorTable.ajax.reload();
-                  $('#doctorModal').modal('hide');
+                  $('#seniorForm')[0].reset();
+                  seniorTable.ajax.reload();
               })
         }
         else
@@ -53,5 +52,5 @@ $('#seniorForm').submit(function(e){
                 'error'
               ); 
         }
-    });
-},'json');
+    },'json');
+});

@@ -7,6 +7,7 @@ class Senior extends MY_Controller
     function __construct() 
     {
         parent::__construct();
+        $this->load->library('phpqrcode/qrlib');
         $mdl=array(
             'senior_model'=>'senior_mdl'
         );
@@ -18,6 +19,8 @@ class Senior extends MY_Controller
         if(!$this->session->has_userdata('logged_in'))
         {
             redirect(base_url());
+        }
+        else{
         }
     }
 
@@ -82,12 +85,31 @@ class Senior extends MY_Controller
         if($this->input->post('id') == '')
         {
             $insert = $this->senior_mdl->save($data3);
+            $this->qrcodeGenerator($insert);
         }
+        
         else
         {
             $insert = $this->senior_mdl->update(array("id" => $this->input->post('id')), $data3);
         }
 
         echo json_encode(array("status" => TRUE, "id"=> $insert));
+    }
+
+    public function qrcodeGenerator ($id)
+	{
+		
+			//file path for store images
+		    $SERVERFILEPATH = $_SERVER['DOCUMENT_ROOT'].'/assets/qr/';
+		   
+			$text= substr($id, 0,9);
+			
+			$folder = $SERVERFILEPATH;
+			$file_name1 = $id . ".png";
+			$file_name = $folder.$file_name1;
+            QRcode::png($text,$file_name);
+            
+            $this->senior_mdl->upload_qr($id,$file_name1);
+			
     }
 }
