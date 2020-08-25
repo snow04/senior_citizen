@@ -3,137 +3,139 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Loader_model extends CI_Model{
 
+    function css($link)
+    {
+        echo '<link href="'.s_url.$link.'"  rel="stylesheet" type="text/css"/>';
+    }
+
+    function css_load($url, $link)
+    {
+        if(uri_string() == $url)
+        {
+            echo '<link href="'.s_url.$link.'" rel="stylesheet" type="text/css" />';
+        }
+    }
+
+    function js_plug($src)
+    {
+        echo '<script src="'.s_url.$src.'" type="text/javascript" defer></script>';
+    }
+
+    public function js($url, $with_id, $script)
+    {
+        $val = '/';
+
+        if($with_id)
+        {
+            $val .= $this->uri->segment(3);
+        }
+        else
+        {
+            $val = '';
+        }
+
+        if(uri_string()==$url.$val)
+        {
+            echo '<script src="'.s_url.'myjs/modules/'.$script.'" type="module" defer></script>';
+        }
+    }
+
     public function css_loader($uri_string)
     {
-        // echo '<link href="'.s_url.'mycss/datatable.css" rel="stylesheet" type="text/css" />';
-
         $date_calendar =array('schedule');
         if (in_array($uri_string, $date_calendar)) 
         {
-            // echo '<link href="' . s_url . 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" type="text/css" />';
-            echo '<link href="'.s_url.'bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />';
-            echo '<link href="'.s_url.'fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />';
+            $this->css('bootstrap-datepicker/css/bootstrap-datepicker.min.css');
+            $this->css('fullcalendar/fullcalendar.min.css');
         }
 
-        $dt_tables=array('senior');
-
+        $dt_tables=array('senior','users','sc_printer');
         if (in_array($uri_string, $dt_tables)) 
         {
-            // echo '<link href="' . s_url . 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" type="text/css" />';
-            echo '<link href="'.s_url.'datatables/datatables.min.css" rel="stylesheet" type="text/css" />';
-            echo '<link href="'.s_url.'datatables/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />';
+            $this->css('datatables/datatables.min.css');
+            $this->css('datatables/datatables/css/dataTables.bootstrap4.min.css');
         }
 
-        $dt_filter_pane = array('senior');
+        $dt_filter_pane = array('senior','users','sc_printer');
 
         if (in_array($uri_string, $dt_filter_pane)) 
         {
-            echo '<link href="'.s_url.'datatables/searchpanes/css/searchPanes.bootstrap4.min.css" rel="stylesheet" type="text/css" />';
-            echo '<link href="'.s_url.'datatables/select/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />';
+            $this->css('datatables/searchpanes/css/searchPanes.bootstrap4.min.css');
+            $this->css('datatables/select/css/select.bootstrap4.min.css');
         }
 
-        $dt_col_reorder = array('senior');
+        $dt_col_reorder = array('senior', 'users','sc_printer');
 
         if (in_array($uri_string, $dt_col_reorder)) 
         {
-            echo '<link href="'.s_url.'datatables/colreorder/css/colReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />';
+            $this->css('datatables/colreorder/css/colReorder.bootstrap4.min.css');
         }
 
-        if(uri_string() == '' || uri_string() == 'main/sign_choose' || uri_string() == 'main/clinic_login'
-        || uri_string() == 'main/patient_login')
-        {
-            echo '<link href="'.s_url.'mycss/main.css" rel="stylesheet" type="text/css" />';
-        }
+        $this->css_load('','mycss/main.css');
+        $this->css_load('main/sign_choose', 'mycss/main.css');
+        $this->css_load('main/clinic_login', 'mycss/main.css');
+        $this->css_load('main/patient_login', 'mycss/main.css');
+        $this->css_load('main/clinic_signup', 'mycss/clinic_signup.css');
+        $this->css_load('main/patient_signup', 'mycss/patient_signup.css');
+        $this->css_load('profile', 'mycss/profile.css');
+        $this->css_load('sc_printer', 'sc_printer/css/sc_printer.css');
+    
+    }
 
-        if(uri_string() == 'main/clinic_signup')
-        {
-            echo '<link href="'.s_url.'mycss/clinic_signup.css" rel="stylesheet" type="text/css" />';
-        }
-
-        if(uri_string() == 'main/patient_signup')
-        {
-            echo '<link href="'.s_url.'mycss/patient_signup.css" rel="stylesheet" type="text/css" />';
-        }
-        
-        if(uri_string()== 'profile')
-        {
-            echo '<link href="'.s_url.'mycss/profile.css" rel="stylesheet" type="text/css" />';
-        }
-        
-    } 
-
+    
     public function js_pluginLoader($uri_string)
     {
         $date_calendar =array('schedule','profile','patient_history');
         if (in_array($uri_string, $date_calendar)) 
         {
-            echo '<script src="' . s_url . 'bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'fullcalendar/fullcalendar.min.js" type="text/javascript" defer></script>';
+            $this->js_plug('bootstrap-datepicker/js/bootstrap-datepicker.min.js');
+            $this->js_plug('fullcalendar/fullcalendar.min.js');
         }
         
-        $dt_tables=array('senior');
+        $dt_tables=array('senior', 'users','sc_printer');
         
         if (in_array($uri_string,$dt_tables)) 
         {
-            echo '<script src="' . s_url . 'datatables/datatables.min.js" type="text/javascript" defer></script>';
+            $this->js_plug('datatables/datatables.min.js');
         }
 
-        $dt_filter_pane = array('senior');
+        $dt_filter_pane = array('senior', 'users','sc_printer');
 
         if (in_array($uri_string,$dt_filter_pane)) 
         {
-            echo '<script src="' . s_url . 'datatables/searchpanes/js/searchPanes.bootstrap4.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/select/js/select.bootstrap4.min.js" type="text/javascript" defer></script>';
+            $this->js_plug('datatables/searchpanes/js/searchPanes.bootstrap4.min.js');
+            $this->js_plug('datatables/select/js/select.bootstrap4.min.js');
         }
 
-        $dt_buttons = array('senior');
+        $dt_buttons = array('senior', 'users','sc_printer');
 
         if (in_array($uri_string,$dt_buttons)) 
         {
-            echo '<script src="' . s_url . 'datatables/buttons/js/buttons.colVis.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/buttons/js/buttons.bootstrap4.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/buttons/js/buttons.print.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/buttons/js/buttons.html5.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/pdfmake/pdfmake.min.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/pdfmake/vfs_fonts.js" type="text/javascript" defer></script>';
-            echo '<script src="' . s_url . 'datatables/jszip/jszip.min.js" type="text/javascript" defer></script>';
+            $this->js_plug('datatables/buttons/js/buttons.colVis.min.js');
+            $this->js_plug('datatables/buttons/js/buttons.bootstrap4.min.js');
+            $this->js_plug('datatables/buttons/js/buttons.print.min.js');
+            $this->js_plug('datatables/buttons/js/buttons.html5.min.js');
+            $this->js_plug('datatables/pdfmake/pdfmake.min.js');
+            $this->js_plug('datatables/pdfmake/vfs_fonts.js');
+            $this->js_plug('datatables/jszip/jszip.min.js');
         }
 
-        $dt_col_reorder = array('senior');
+        $dt_col_reorder = array('senior', 'users','sc_printer');
 
         if (in_array($uri_string,$dt_col_reorder)) 
         {
-            echo '<script src="' . s_url . 'datatables/colreorder/js/colReorder.bootstrap4.min.js" type="text/javascript" defer></script>';
+            $this->js_plug('datatables/colreorder/js/colReorder.bootstrap4.min.js');
         }
     }
-
+    
     public function js_loader($uri_string)
     {
 
-        if(uri_string()=='')
-        {
-            echo '<script src="'.s_url.'myjs/modules/main/main.js" type="module" defer></script>';
-        }
-
-        if(uri_string()=='profile')
-        {
-            echo '<script src="'.s_url.'myjs/modules/profile/profile.js" type="module" defer></script>';
-        }
-
-        if(uri_string()=='senior')
-        {
-            echo '<script src="'.s_url.'myjs/modules/senior/senior.js" type="module" defer></script>';
-        }
-        
-        // $val = $this->uri->segment(3);
-        // if(uri_string()=='student/index/'.$val)
-        // {
-        //     echo '<script src="'.s_url.'myjs/modules/student/student.js" type="module" defer></script>';
-        // }
-
-        
-
-        
+        $this->js('', false, 'main/main.js');
+        $this->js('profile', false, 'profile/profile.js');
+        $this->js('senior', false, 'senior/senior.js');
+        $this->js('users', false, 'users/users.js');
+        $this->js('sc_printer', false, 'sc_printer/sc_printer.js');
         
     }
 
@@ -144,6 +146,5 @@ class Loader_model extends CI_Model{
             $this->load->model($mdlk,$mdlv);
         }
     }
-
     
 }

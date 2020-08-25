@@ -49,9 +49,9 @@ $('#seniorForm').submit(function(e){
         {
             Swal.fire(
                 'Failed!',
-                `${data.error}`,
+                `Something went wrong`,
                 'error'
               ); 
         }
     });
-});
+},'json');
