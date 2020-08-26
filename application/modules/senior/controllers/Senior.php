@@ -24,6 +24,17 @@ class Senior extends MY_Controller
         }
     }
 
+    function load_barangay()
+    {
+        echo json_encode($this->senior_mdl->load_barangay());
+    }
+
+    function load_purok($barangay)
+    {
+        $output =  str_replace('%20', ' ', $barangay);
+        echo json_encode($this->senior_mdl->load_purok($output));
+    }
+
     public function index()
     {
         // Call this function whenever you use to load your view / functions . . . 
@@ -51,14 +62,15 @@ class Senior extends MY_Controller
             $name[] = $t->lname;
 
             $row['name'] = $name;
+            $row['pi_pk'] = $t->pi_pk;
 
             // $row['username'] = $t->username;
             $row['gender'] = $t->sex;
             $row['purok'] = $t->purok;
             $row['barangay'] = $t->barangay;
-            $row['picture'] = 'p';
-            $row['signature'] = 's';
-            $row['thumbmark'] = 't';
+            $row['picture'] = '<button class="btn btn-success btn-sm"><i class="fa fa-id-card"></i></button>';
+            $row['signature'] = '<button class="btn btn-primary btn-sm"><i class="fa fa-signature"></i></button>';
+            $row['thumbmark'] = '<button class="btn btn-danger btn-sm"><i class="fa fa-fingerprint"></i></button>';
            
             $data[] = $row;
         }  
@@ -75,7 +87,7 @@ class Senior extends MY_Controller
         $data3 = array(
             'fname' => $this->input->post('firstname'),
             'mname' => $this->input->post('middlename'),
-            'lname' => $this->input->post('lastname'),
+            'lname' => $this->input->post('lastanme'),
             'birthdate' => $this->input->post('birthdate'),
             'sex' => $this->input->post('gender'),
             'purok' => $this->input->post('purok'),

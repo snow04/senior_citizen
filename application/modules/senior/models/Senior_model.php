@@ -20,6 +20,25 @@ class Senior_model extends CI_Model
         return $query->result();
     }
 
+    public function load_barangay()
+    {
+        $this->db->select('DISTINCT (`barangay`) ');
+        $this->db->from('purok');
+        $this->db->order_by('barangay','DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function load_purok($barangay)
+    {
+        $this->db->select('DISTINCT (`purok`) ');
+        $this->db->from('purok');
+        $this->db->where('barangay', $barangay);
+        $this->db->order_by('purok','DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function save($data)
     {
       $this->db->insert($this->table, $data);
