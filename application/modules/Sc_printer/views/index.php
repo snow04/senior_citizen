@@ -5,9 +5,11 @@
                 <table class="table table-stripe">
                     <thead>
                         <tr>
-                            <th>
-                                
-                            </th>
+                            <th>Name</th>
+                            <th>Purok</th>
+                            <th>Barangay</th>
+                            <th>Printed</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>

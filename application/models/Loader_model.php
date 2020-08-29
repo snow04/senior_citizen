@@ -78,7 +78,7 @@ class Loader_model extends CI_Model{
         $this->css_load('main/clinic_signup', 'mycss/clinic_signup.css');
         $this->css_load('main/patient_signup', 'mycss/patient_signup.css');
         $this->css_load('profile', 'mycss/profile.css');
-        $this->css_load('sc_printer', 'sc_printer/css/sc_printer.css');
+        $this->css_load('sc_printer', 'mycss/css/sc_printer.css');
     
     }
 

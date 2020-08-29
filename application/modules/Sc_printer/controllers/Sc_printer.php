@@ -32,4 +32,40 @@ class Sc_printer extends MY_Controller
         $data['template_type']="admin";
         $this->load->view('includes/templates',$data);
     }
+
+    public function load_print()
+    {
+        
+        $list = $this->sc_printer_mdl->load_print();
+        
+
+        $data = array();
+
+        foreach ($list as $t) 
+        {
+            $row = array();
+
+            $row['pi_pk'] = $t->pi_pk;
+            
+            $name = array();
+            $name[] = $t->fname;
+            $name[] = $t->lname;
+
+            $row['name'] = $name;
+
+            // $row['username'] = $t->username;
+            $row['purok'] = $t->purok;
+            $row['barangay'] = $t->barangay;
+            $row['printed'] = $t->printed;
+            $row['action'] = '<button class="btn btn-primary"><i class="fa fa-print"></i></button>';
+           
+            $data[] = $row;
+        }  
+ 
+        $output = array(
+            "data" => $data,
+        );
+        
+        echo json_encode($output);
+    }
 }
