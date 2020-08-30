@@ -2,9 +2,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table class="table table-stripe">
+                <table class="table table-stripe" id="printTable">
                     <thead>
                         <tr>
+                            <th>id</th>
                             <th>Name</th>
                             <th>Purok</th>
                             <th>Barangay</th>
@@ -15,5 +16,10 @@
                 </table>
             </div>
         </div>
+
+        <div class="col-md-12">
+            Print Preview
+        </div>
+
     </div>
 </div>

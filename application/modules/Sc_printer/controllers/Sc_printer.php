@@ -38,7 +38,6 @@ class Sc_printer extends MY_Controller
         
         $list = $this->sc_printer_mdl->load_print();
         
-
         $data = array();
 
         foreach ($list as $t) 
@@ -53,11 +52,10 @@ class Sc_printer extends MY_Controller
 
             $row['name'] = $name;
 
-            // $row['username'] = $t->username;
             $row['purok'] = $t->purok;
             $row['barangay'] = $t->barangay;
-            $row['printed'] = $t->printed;
-            $row['action'] = '<button class="btn btn-primary"><i class="fa fa-print"></i></button>';
+            $row['printed'] = $t->date;
+            $row['action'] = '<button class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>';
            
             $data[] = $row;
         }  

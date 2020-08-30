@@ -30,16 +30,16 @@ $('#barangay').change(function()
         $('#purok').html(html);
 
     },'json');
-})
+});
 
 let seniorTable =  $('#seniorTable').DataTable({ 
     "processing": true,
         "ajax": `${base_url}/senior/senior_list`,
         "columns": [
             { "visible": false, "width": "40%", "data": "pi_pk"},
-            { "width": "40%", "data": "name[, ]" },
+            { "width": "30%", "data": "name[, ]" },
             { "width": "10%", "data": "gender" },
-            { "width": "10%", "data": "purok" },
+            { "width": "20%", "data": "purok" },
             { "width": "10%", "data": "barangay" },
             { "width": "10%", "data": "picture" },
             { "width": "10%", "data": "signature" },
@@ -49,15 +49,6 @@ let seniorTable =  $('#seniorTable').DataTable({
         "deferRender": true,
         "responsive": true,
         dom: 'PBfrtip',
-    // buttons: [
-    //     {
-    //         text: 'Add Doctor <i class="fa fa-user-plus"></i>',
-    //         action: function ( e, dt, node, config ) {
-    //             $('#doctorForm')[0].reset();
-    //             $('#doctorModal').modal('show');
-    //         }
-    //     }
-    // ],
 
 });     
 
