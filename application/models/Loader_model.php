@@ -42,6 +42,14 @@ class Loader_model extends CI_Model{
 
     public function css_loader($uri_string)
     {
+        $cropper = array('senior');
+        if (in_array($uri_string, $cropper)) 
+        {
+            $this->css('cropper/cropper.css');
+            $this->css('cropper/mycss.css');
+        }
+
+
         $date_calendar =array('schedule');
         if (in_array($uri_string, $date_calendar)) 
         {
@@ -85,6 +93,13 @@ class Loader_model extends CI_Model{
     
     public function js_pluginLoader($uri_string)
     {
+        $cropper_js =array('senior');
+        if (in_array($uri_string, $cropper_js)) 
+        {
+            $this->js_plug('cropper/cropper.min.js');
+        }
+
+
         $date_calendar =array('schedule','profile','patient_history');
         if (in_array($uri_string, $date_calendar)) 
         {
